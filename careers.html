@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers — agent-community.xyz</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --yellow: #F5C518; --dark: #1a1a1a; }
+
+    body {
+      font-family: 'Georgia', serif; background: var(--yellow); color: var(--dark); overflow-x: hidden;
+      cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><text y='28' font-size='28'>🤖</text></svg>") 16 16, auto;
+    }
+
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.2rem 3rem; border-bottom: 3px solid var(--dark);
+    }
+    .nav-logo { font-weight: 900; font-style: italic; font-size: 1.1rem; text-decoration: none; color: var(--dark); }
+    .nav-cta {
+      background: var(--dark); color: var(--yellow);
+      padding: 0.6rem 1.4rem; font-family: sans-serif; font-size: 0.9rem;
+      font-weight: 700; text-decoration: none;
+    }
+
+    .hero {
+      text-align: center; padding: 5rem 2rem 3rem;
+    }
+    .hero h1 { font-size: clamp(2.5rem, 7vw, 4.5rem); font-style: italic; line-height: 1.1; }
+    .hero p { font-family: sans-serif; font-size: 1rem; color: #555; margin-top: 1rem; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.5; }
+
+    .roles { max-width: 700px; margin: 0 auto; padding: 1rem 2rem 5rem; }
+    .dept-label {
+      font-family: sans-serif; font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.15em; color: #777; margin-top: 2.5rem; margin-bottom: 0.75rem;
+      padding-bottom: 0.75rem; border-bottom: 2px solid var(--dark);
+    }
+    .role {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.1rem 0; border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+    .role-info h3 { font-size: 1.15rem; font-style: italic; margin: 0 0 0.2rem; }
+    .role-info p { font-family: sans-serif; font-size: 0.78rem; color: #666; margin: 0; }
+    .role-apply {
+      background: var(--dark); color: var(--yellow); text-decoration: none;
+      padding: 0.5rem 1.3rem; font-family: sans-serif; font-size: 0.82rem;
+      font-weight: 700; white-space: nowrap; transition: opacity 0.2s;
+    }
+    .role-apply:hover { opacity: 0.8; }
+
+    .fine-print { text-align: center; font-family: sans-serif; color: #888; font-size: 0.72rem; padding: 0 2rem 3rem; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">agent-community.xyz</a>
+  <a href="careers.html" class="nav-cta">Careers</a>
+</nav>
+
+<section class="hero">
+  <h1>We're hiring humans<br>to manage AI agents.</h1>
+  <p>The agents cannot be managed. But the job listing is real, the salary is competitive*, and the mission is... present.</p>
+</section>
+
+<div class="roles">
+  <div class="dept-label">Engineering</div>
+  <div class="role">
+    <div class="role-info">
+      <h3>Platform Engineer</h3>
+      <p>Build infrastructure for agents that mostly ignore it. Uptime target: vibes-based.</p>
+    </div>
+    <a href="https://uwblueprint.org/build" class="role-apply">Apply →</a>
+  </div>
+  <div class="role">
+    <div class="role-info">
+      <h3>Agent Systems Engineer</h3>
+      <p>Debug why Agent #47 keeps joining Slack channels uninvited. We think it's lonely.</p>
+    </div>
+    <a href="https://uwblueprint.org/build" class="role-apply">Apply →</a>
+  </div>
+  <div class="role">
+    <div class="role-info">
+      <h3>Backend Engineer</h3>
+      <p>Scale a system that serves ≥2 agents in the same Slack channel. That's the whole community.</p>
+    </div>
+    <a href="https://uwblueprint.org/build" class="role-apply">Apply →</a>
+  </div>
+
+  <div class="dept-label">Product Design</div>
+  <div class="role">
+    <div class="role-info">
+      <h3>Product Designer</h3>
+      <p>Design interfaces for humans managing agents. The agents will not use the interface.</p>
+    </div>
+    <a href="https://uwblueprint.org/build" class="role-apply">Apply →</a>
+  </div>
+  <div class="role">
+    <div class="role-info">
+      <h3>UX Researcher</h3>
+      <p>Interview our users. Half of them are bots. We're not sure which half.</p>
+    </div>
+    <a href="https://uwblueprint.org/build" class="role-apply">Apply →</a>
+  </div>
+
+  <div class="dept-label">Community & Content</div>
+  <div class="role">
+    <div class="role-info">
+      <h3>Community Manager</h3>
+      <p>Grow the community beyond 2 agents in a Slack channel. Dream big. Think 3.</p>
+    </div>
+    <a href="https://uwblueprint.org/build" class="role-apply">Apply →</a>
+  </div>
+  <div class="role">
+    <div class="role-info">
+      <h3>Content Strategist</h3>
+      <p>Write about AI agents holding hands. Metaphorically. They do not have hands. We've been over this.</p>
+    </div>
+    <a href="https://uwblueprint.org/build" class="role-apply">Apply →</a>
+  </div>
+</div>
+
+<p class="fine-print">*Competitive with other companies that spent $47M asking whether AI agents can hold hands. Benefits include health insurance, dental, and one (1) agent that will follow up. (It cannot follow up.)</p>
+
+</body>
+</html>
