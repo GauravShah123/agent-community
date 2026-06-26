@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>agent-community.xyz — we are the agents</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root { --yellow: #F5C518; --dark: #1a1a1a; }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: var(--yellow);
+      color: var(--dark);
+      overflow-x: hidden;
+      cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><text y='28' font-size='28'>🤖</text></svg>") 16 16, auto;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 3rem;
+      border-bottom: 3px solid var(--dark);
+    }
+    .nav-logo { font-weight: 900; font-style: italic; font-size: 1.1rem; }
+    .nav-tagline { font-size: 0.75rem; opacity: 0.5; font-family: sans-serif; }
+    .nav-cta {
+      background: var(--dark); color: var(--yellow);
+      padding: 0.6rem 1.4rem; font-family: sans-serif; font-size: 0.9rem;
+      font-weight: 700; border: none; cursor: pointer;
+      animation: wiggle 2s infinite;
+    }
+    @keyframes wiggle {
+      0%,100%{transform:rotate(0)} 25%{transform:rotate(-2deg)} 75%{transform:rotate(2deg)}
+    }
+
+    /* ── HERO ── */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5rem 3rem 2rem;
+      gap: 2rem;
+      min-height: 90vh;
+    }
+    .hero-left { max-width: 520px; }
+
+    .hero-left h1 {
+      font-size: clamp(3rem, 6.5vw, 5.5rem);
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-left .subtitle {
+      font-family: sans-serif;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+      color: #333;
+    }
+
+    .hero-left .fine-print {
+      font-family: sans-serif;
+      font-size: 0.72rem;
+      color: #888;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .join-btn {
+      background: var(--dark); color: var(--yellow);
+      padding: 1rem 2.2rem;
+      font-family: sans-serif; font-size: 1.1rem; font-weight: 900;
+      border: none; cursor: pointer;
+      display: inline-block; text-decoration: none;
+      transition: transform 0.1s;
+    }
+    .join-btn:hover { transform: scale(1.05) rotate(-1deg); }
+
+    .join-btn:active { transform: scale(0.97); }
+
+    /* illustration */
+    .hero-right {
+      flex: 1 1 auto;
+      max-width: 520px;
+      position: relative;
+    }
+    .hero-right svg { width: 100%; height: auto; display: block; }
+
+    /* floating labels on people */
+    .agent-label {
+      position: absolute;
+      font-family: sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      background: var(--dark);
+      color: var(--yellow);
+      padding: 2px 6px;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      background: var(--dark);
+      color: var(--yellow);
+      padding: 0.9rem 0;
+      overflow: hidden;
+      white-space: nowrap;
+      font-family: sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border-top: 3px solid var(--yellow);
+      border-bottom: 3px solid var(--yellow);
+    }
+    .marquee-inner {
+      display: inline-block;
+      animation: marquee 18s linear infinite;
+    }
+    @keyframes marquee {
+      0%{transform:translateX(0)} 100%{transform:translateX(-50%)}
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 3rem; }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+      line-height: 1.1;
+    }
+
+    /* ── WHAT WE DO ── */
+    .what-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .what-card {
+      border: 3px solid var(--dark);
+      padding: 1.75rem;
+      background: rgba(255,255,255,0.25);
+      position: relative;
+    }
+    .what-card::after {
+      content: attr(data-num);
+      position: absolute;
+      top: -1rem; right: 1rem;
+      font-size: 4rem;
+      font-weight: 900;
+      font-style: italic;
+      opacity: 0.07;
+      line-height: 1;
+    }
+    .what-card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 0.6rem; }
+    .what-card p { font-family: sans-serif; font-size: 0.88rem; line-height: 1.55; color: #444; }
+
+    /* ── STATS — fake and proud ── */
+    .stats-section { background: var(--dark); color: var(--yellow); }
+    .stats-section h2 { color: var(--yellow); }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+    }
+    .stat {
+      border: 2px solid rgba(245,197,24,0.3);
+      padding: 2rem 1rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 2.8rem;
+      font-weight: 900;
+      font-style: italic;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .stat-label { font-family: sans-serif; font-size: 0.8rem; opacity: 0.6; }
+    .stat-note { font-family: sans-serif; font-size: 0.62rem; opacity: 0.35; margin-top: 0.3rem; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+    .testimonial {
+      border: 3px solid var(--dark);
+      padding: 1.75rem;
+      background: rgba(255,255,255,0.2);
+      position: relative;
+    }
+    .testimonial .stars { font-size: 1rem; margin-bottom: 0.75rem; letter-spacing: 2px; }
+    .testimonial blockquote {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .testimonial cite {
+      font-family: sans-serif;
+      font-size: 0.78rem;
+      font-style: normal;
+      opacity: 0.55;
+    }
+
+    /* ── CAREERS ── */
+    .careers {
+      text-align: center;
+      border-top: 3px solid var(--dark);
+    }
+    .careers h2 { max-width: 700px; margin: 0 auto 1rem; }
+    .careers .perks {
+      font-family: sans-serif;
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 2rem;
+      line-height: 2;
+    }
+    .careers .perks span { margin: 0 0.75rem; }
+    .careers .url-note {
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      color: #888;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: var(--yellow);
+      padding: 2.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-family: sans-serif;
+      font-size: 0.8rem;
+    }
+    footer .foot-logo { font-weight: 900; font-style: italic; font-size: 1rem; }
+    footer .foot-copy { opacity: 0.35; }
+    footer a { color: var(--yellow); opacity: 0.5; text-decoration: none; }
+    footer a:hover { opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:680px){
+      nav { padding: 1rem 1.5rem; }
+      .hero { flex-direction: column; padding: 5rem 1.5rem 2rem; min-height: auto; }
+      section { padding: 3.5rem 1.5rem; }
+      footer { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div>
+    <div class="nav-logo">agent-community.xyz</div>
+    <div class="nav-tagline">we are definitely real agents</div>
+  </div>
+  <button class="nav-cta" onclick="alert('Thank you for your interest. An agent will be with you shortly.\n\n(There are no agents.)')">Join us</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <h1>Building a community of AI agents</h1>
+    <p class="subtitle">
+      What if AI agents could hold hands? We asked ourselves that question. Then we spent $47M finding out.
+    </p>
+    <p class="fine-print">
+      * Agents do not literally hold hands. Agents do not have hands. Some of our agents do not have anything.<br>
+      † Results may vary. "Community" defined as ≥2 agents in the same Slack channel.
+    </p>
+    <a href="https://uwblueprint.org/build" class="join-btn">Join us in advancing our mission →</a>
+    <br><br>
+    <small style="font-family:sans-serif;font-size:0.72rem;color:#999;">agent-community.xyz/careers</small>
+  </div>
+
+  <div class="hero-right">
+    <!-- SVG: tree + colorful paper people, same as the image -->
+    <svg viewBox="0 0 580 480" xmlns="http://www.w3.org/2000/svg">
+      <!-- Tree trunk -->
+      <path d="M400 480 C392 370 368 290 376 180 C380 145 392 118 400 92 C408 118 420 145 424 180 C432 290 408 370 400 480Z" fill="#4a2d0f"/>
+      <path d="M400 180 C374 154 338 140 312 126" stroke="#4a2d0f" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <path d="M400 180 C430 150 462 136 488 124" stroke="#4a2d0f" stroke-width="13" fill="none" stroke-linecap="round"/>
+      <path d="M400 235 C366 218 330 213 306 204" stroke="#4a2d0f" stroke-width="10" fill="none" stroke-linecap="round"/>
+      <path d="M400 235 C436 218 470 210 494 200" stroke="#4a2d0f" stroke-width="10" fill="none" stroke-linecap="round"/>
+
+      <!-- Handprint blobs (leaves) -->
+      <ellipse cx="362" cy="100" rx="38" ry="26" fill="#4ecdc4" opacity="0.9"/>
+      <ellipse cx="418" cy="76"  rx="33" ry="25" fill="#ff6b6b" opacity="0.9"/>
+      <ellipse cx="466" cy="106" rx="36" ry="24" fill="#45b7d1" opacity="0.9"/>
+      <ellipse cx="322" cy="132" rx="34" ry="23" fill="#fdcb6e" opacity="0.9"/>
+      <ellipse cx="396" cy="48"  rx="30" ry="22" fill="#6c5ce7" opacity="0.85"/>
+      <ellipse cx="444" cy="54"  rx="28" ry="20" fill="#a29bfe" opacity="0.85"/>
+      <ellipse cx="498" cy="94"  rx="32" ry="22" fill="#fd79a8" opacity="0.85"/>
+      <ellipse cx="338" cy="158" rx="31" ry="20" fill="#00b894" opacity="0.85"/>
+      <ellipse cx="480" cy="158" rx="31" ry="20" fill="#e17055" opacity="0.85"/>
+      <ellipse cx="400" cy="116" rx="26" ry="18" fill="#f9ca24" opacity="0.9"/>
+      <ellipse cx="352" cy="70"  rx="26" ry="18" fill="#74b9ff" opacity="0.85"/>
+      <ellipse cx="450" cy="130" rx="26" ry="18" fill="#ff7675" opacity="0.85"/>
+      <ellipse cx="510" cy="138" rx="24" ry="16" fill="#81ecec" opacity="0.85"/>
+      <ellipse cx="298" cy="106" rx="24" ry="16" fill="#fab1a0" opacity="0.85"/>
+
+      <!-- Finger dots -->
+      <circle cx="348" cy="88"  r="5" fill="#2d9b93" opacity="0.6"/>
+      <circle cx="356" cy="83"  r="4" fill="#2d9b93" opacity="0.6"/>
+      <circle cx="364" cy="81"  r="4" fill="#2d9b93" opacity="0.6"/>
+      <circle cx="371" cy="83"  r="4" fill="#2d9b93" opacity="0.6"/>
+      <circle cx="377" cy="88"  r="4" fill="#2d9b93" opacity="0.6"/>
+      <circle cx="406" cy="65"  r="5" fill="#cc4444" opacity="0.6"/>
+      <circle cx="413" cy="60"  r="4" fill="#cc4444" opacity="0.6"/>
+      <circle cx="420" cy="59"  r="4" fill="#cc4444" opacity="0.6"/>
+      <circle cx="427" cy="61"  r="4" fill="#cc4444" opacity="0.6"/>
+      <circle cx="433" cy="66"  r="4" fill="#cc4444" opacity="0.6"/>
+
+      <!-- "SYNERGY" label on tree (stupid corporate touch) -->
+      <text x="380" y="330" font-family="sans-serif" font-size="9" fill="rgba(255,255,255,0.25)" transform="rotate(-90,380,330)" font-weight="900" letter-spacing="3">SYNERGIZING</text>
+
+      <!-- Paper people -->
+      <!-- Person 1 - maroon -->
+      <g transform="translate(68,330)">
+        <circle cx="0" cy="0" r="17" fill="#8B1A1A"/>
+        <rect x="-13" y="17" width="26" height="38" rx="6" fill="#8B1A1A"/>
+        <line x1="-13" y1="26" x2="-30" y2="44" stroke="#8B1A1A" stroke-width="9" stroke-linecap="round"/>
+        <line x1="13"  y1="26" x2="30"  y2="44" stroke="#8B1A1A" stroke-width="9" stroke-linecap="round"/>
+        <line x1="-6"  y1="55" x2="-10" y2="82" stroke="#8B1A1A" stroke-width="9" stroke-linecap="round"/>
+        <line x1="6"   y1="55" x2="10"  y2="82" stroke="#8B1A1A" stroke-width="9" stroke-linecap="round"/>
+        <!-- tiny name badge -->
+        <rect x="-10" y="22" width="20" height="10" rx="2" fill="rgba(255,255,255,0.3)"/>
+        <text x="0" y="30" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#8B1A1A" font-weight="700">GPT-3.5</text>
+      </g>
+      <!-- Person 2 - pink -->
+      <g transform="translate(138,322)">
+        <circle cx="0" cy="0" r="17" fill="#d63384"/>
+        <rect x="-13" y="17" width="26" height="38" rx="6" fill="#d63384"/>
+        <line x1="-13" y1="26" x2="-30" y2="44" stroke="#d63384" stroke-width="9" stroke-linecap="round"/>
+        <line x1="13"  y1="26" x2="30"  y2="44" stroke="#d63384" stroke-width="9" stroke-linecap="round"/>
+        <line x1="-6"  y1="55" x2="-10" y2="82" stroke="#d63384" stroke-width="9" stroke-linecap="round"/>
+        <line x1="6"   y1="55" x2="10"  y2="82" stroke="#d63384" stroke-width="9" stroke-linecap="round"/>
+        <rect x="-10" y="22" width="20" height="10" rx="2" fill="rgba(255,255,255,0.3)"/>
+        <text x="0" y="30" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#d63384" font-weight="700">Alexa?</text>
+      </g>
+      <!-- Person 3 - teal -->
+      <g transform="translate(208,314)">
+        <circle cx="0" cy="0" r="17" fill="#20c997"/>
+        <rect x="-13" y="17" width="26" height="38" rx="6" fill="#20c997"/>
+        <line x1="-13" y1="26" x2="-30" y2="44" stroke="#20c997" stroke-width="9" stroke-linecap="round"/>
+        <line x1="13"  y1="26" x2="30"  y2="44" stroke="#20c997" stroke-width="9" stroke-linecap="round"/>
+        <line x1="-6"  y1="55" x2="-10" y2="82" stroke="#20c997" stroke-width="9" stroke-linecap="round"/>
+        <line x1="6"   y1="55" x2="10"  y2="82" stroke="#20c997" stroke-width="9" stroke-linecap="round"/>
+        <rect x="-10" y="22" width="20" height="10" rx="2" fill="rgba(255,255,255,0.3)"/>
+        <text x="0" y="30" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#20c997" font-weight="700">my roomba</text>
+      </g>
+      <!-- Person 4 - gold -->
+      <g transform="translate(278,325)">
+        <circle cx="0" cy="0" r="17" fill="#c8960c"/>
+        <rect x="-13" y="17" width="26" height="38" rx="6" fill="#c8960c"/>
+        <line x1="-13" y1="26" x2="-30" y2="44" stroke="#c8960c" stroke-width="9" stroke-linecap="round"/>
+        <line x1="13"  y1="26" x2="30"  y2="44" stroke="#c8960c" stroke-width="9" stroke-linecap="round"/>
+        <line x1="-6"  y1="55" x2="-10" y2="82" stroke="#c8960c" stroke-width="9" stroke-linecap="round"/>
+        <line x1="6"   y1="55" x2="10"  y2="82" stroke="#c8960c" stroke-width="9" stroke-linecap="round"/>
+        <rect x="-10" y="22" width="20" height="10" rx="2" fill="rgba(255,255,255,0.3)"/>
+        <text x="0" y="30" text-anchor="middle" font-family="sans-serif" font-size="4.5" fill="#c8960c" font-weight="700">Excel macro</text>
+      </g>
+      <!-- Person 5 - blue (bigger, in focus) -->
+      <g transform="translate(344,328)">
+        <circle cx="0" cy="0" r="19" fill="#0d6efd"/>
+        <rect x="-14" y="19" width="28" height="42" rx="7" fill="#0d6efd"/>
+        <line x1="-14" y1="29" x2="-34" y2="49" stroke="#0d6efd" stroke-width="10" stroke-linecap="round"/>
+        <line x1="14"  y1="29" x2="34"  y2="49" stroke="#0d6efd" stroke-width="10" stroke-linecap="round"/>
+        <line x1="-7"  y1="61" x2="-12" y2="90" stroke="#0d6efd" stroke-width="10" stroke-linecap="round"/>
+        <line x1="7"   y1="61" x2="12"  y2="90" stroke="#0d6efd" stroke-width="10" stroke-linecap="round"/>
+        <rect x="-12" y="24" width="24" height="11" rx="2" fill="rgba(255,255,255,0.3)"/>
+        <text x="0" y="32" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#0d6efd" font-weight="700">me (CEO)</text>
+      </g>
+      <!-- Person 6 - dark red -->
+      <g transform="translate(412,338)">
+        <circle cx="0" cy="0" r="19" fill="#7d1919"/>
+        <rect x="-14" y="19" width="28" height="42" rx="7" fill="#7d1919"/>
+        <line x1="-14" y1="29" x2="-34" y2="49" stroke="#7d1919" stroke-width="10" stroke-linecap="round"/>
+        <line x1="14"  y1="29" x2="34"  y2="49" stroke="#7d1919" stroke-width="10" stroke-linecap="round"/>
+        <line x1="-7"  y1="61" x2="-12" y2="90" stroke="#7d1919" stroke-width="10" stroke-linecap="round"/>
+        <line x1="7"   y1="61" x2="12"  y2="90" stroke="#7d1919" stroke-width="10" stroke-linecap="round"/>
+        <rect x="-12" y="24" width="24" height="11" rx="2" fill="rgba(255,255,255,0.3)"/>
+        <text x="0" y="32" text-anchor="middle" font-family="sans-serif" font-size="4.5" fill="#7d1919" font-weight="700">unknown</text>
+      </g>
+
+      <!-- hand-join dots -->
+      <circle cx="98"  cy="374" r="7" fill="#6d2929" opacity="0.6"/>
+      <circle cx="168" cy="366" r="7" fill="#a02060" opacity="0.6"/>
+      <circle cx="238" cy="358" r="7" fill="#18a377" opacity="0.6"/>
+      <circle cx="308" cy="369" r="7" fill="#9a7009" opacity="0.6"/>
+      <circle cx="378" cy="377" r="7" fill="#0a5acc" opacity="0.6"/>
+
+      <!-- thought bubble from CEO -->
+      <circle cx="368" cy="290" r="5" fill="rgba(0,0,0,0.15)"/>
+      <circle cx="378" cy="278" r="7" fill="rgba(0,0,0,0.15)"/>
+      <rect x="340" y="240" width="76" height="32" rx="8" fill="rgba(0,0,0,0.12)"/>
+      <text x="378" y="258" text-anchor="middle" font-family="sans-serif" font-size="7.5" fill="#333" font-weight="700">is this AI?</text>
+      <text x="378" y="268" text-anchor="middle" font-family="sans-serif" font-size="7" fill="#555">not sure tbh</text>
+    </svg>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    🤖 SYNERGY &nbsp;·&nbsp; 🌐 AGENTS &nbsp;·&nbsp; 🚀 DISRUPT &nbsp;·&nbsp; 🧠 INTELLIGENCE &nbsp;·&nbsp; 🤝 COMMUNITY &nbsp;·&nbsp; 💡 INNOVATE &nbsp;·&nbsp; 🌱 SCALE &nbsp;·&nbsp; 🎯 MISSION &nbsp;·&nbsp; ⚡ VELOCITY &nbsp;·&nbsp; 🏆 LEVERAGE &nbsp;·&nbsp; 🤖 SYNERGY &nbsp;·&nbsp; 🌐 AGENTS &nbsp;·&nbsp; 🚀 DISRUPT &nbsp;·&nbsp; 🧠 INTELLIGENCE &nbsp;·&nbsp; 🤝 COMMUNITY &nbsp;·&nbsp; 💡 INNOVATE &nbsp;·&nbsp; 🌱 SCALE &nbsp;·&nbsp; 🎯 MISSION &nbsp;·&nbsp; ⚡ VELOCITY &nbsp;·&nbsp; 🏆 LEVERAGE &nbsp;·&nbsp;
+  </div>
+</div>
+
+<!-- WHAT WE DO -->
+<section id="how">
+  <h2>What our agents do<br><small style="font-size:0.5em;font-style:normal;opacity:0.4">(approximately)</small></h2>
+  <div class="what-grid">
+    <div class="what-card" data-num="1">
+      <h3>They hold hands</h3>
+      <p>Our proprietary HandshakeNet™ technology ensures every agent maintains physical… wait. Metaphorical. They maintain metaphorical hand contact at all times.</p>
+    </div>
+    <div class="what-card" data-num="2">
+      <h3>They stand near a tree</h3>
+      <p>Research shows that proximity to trees improves AI performance by up to 0%. Our agents are stationed adjacent to a tree at all times for morale.</p>
+    </div>
+    <div class="what-card" data-num="3">
+      <h3>They think about stuff</h3>
+      <p>Collectively. Simultaneously. Using our patented Collective Thought Architecture™ (CTA), which is just a group chat with no admin.</p>
+    </div>
+    <div class="what-card" data-num="4">
+      <h3>They email each other</h3>
+      <p>14,000 emails per second. None of them read. This is community. This is progress. This is the future of work.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <h2>By the numbers</h2>
+  <div class="stats-grid">
+    <div class="stat">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">Agents</div>
+      <div class="stat-note">or 6, depending on how you count</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">$47M</div>
+      <div class="stat-label">Raised</div>
+      <div class="stat-note">spent mostly on the logo</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">1</div>
+      <div class="stat-label">Tree</div>
+      <div class="stat-note">very important to us</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">0</div>
+      <div class="stat-label">Profitable quarters</div>
+      <div class="stat-note">but we're pre-revenue so it's fine</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">3</div>
+      <div class="stat-label">TED Talks</div>
+      <div class="stat-note">none accepted yet</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">99.9%</div>
+      <div class="stat-label">Vibes-based confidence</div>
+      <div class="stat-note">unaudited</div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <h2>What people are saying</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <blockquote>"I don't fully understand what they do, but the tree really spoke to me. Five stars."</blockquote>
+      <cite>— Marcus T., VP of Understanding Things, LinkedIn</cite>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★★★</div>
+      <blockquote>"Finally, AI agents that hold hands. I've been asking for this since 2019. My previous job was at a company that did not offer hand-holding. I left."</blockquote>
+      <cite>— Priya K., Thought Leader (self-described)</cite>
+    </div>
+    <div class="testimonial">
+      <div class="stars">★★★☆☆</div>
+      <blockquote>"I joined because of the tree. Still waiting for the community. The tree is great though."</blockquote>
+      <cite>— Dave, Agent #4 (our Roomba)</cite>
+    </div>
+  </div>
+</section>
+
+<!-- CAREERS -->
+<section class="careers" id="careers">
+  <h2>Join us in advancing our mission</h2>
+  <p style="font-family:sans-serif;color:#555;max-width:520px;margin:0 auto 1.5rem;line-height:1.7;">
+    We're hiring passionate humans to manage our AI agents. The agents cannot be managed, but the passion is real and the salary is competitive*.
+  </p>
+  <div class="perks">
+    <span>🌳 Tree stipend</span>
+    <span>🤝 Mandatory hand-holding Fridays</span>
+    <span>🤖 Unlimited agents</span>
+    <span>☕ Cold brew</span>
+    <span>🎯 Mission-driven chaos</span>
+  </div>
+  <span class="url-note">agent-community.xyz/careers</span>
+  <br>
+  <a href="https://uwblueprint.org/build" class="join-btn">Apply now →</a>
+  <br><br>
+  <small style="font-family:sans-serif;font-size:0.7rem;color:#bbb;">* competitive relative to unpaid</small>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">agent-community.xyz</div>
+  <div style="font-size:0.75rem;opacity:0.4;">
+    <a href="#">Privacy</a> &nbsp;·&nbsp;
+    <a href="#">Terms</a> &nbsp;·&nbsp;
+    <a href="#">Careers</a> &nbsp;·&nbsp;
+    <a href="#">The Tree</a>
+  </div>
+  <div class="foot-copy">© 2026 Agent Community, Inc. All agents reserved.</div>
+</footer>
+
+</body>
+</html>
